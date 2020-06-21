@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour
 
 
    void Start(){
-       extraJumps = extraJumpsValue;
        rb = GetComponent<Rigidbody2D>();
    }
 
@@ -43,13 +42,7 @@ public class PlayerController : MonoBehaviour
 
    void Update(){
 
-       if(isGrounded == true) {
-           extraJumps = extraJumpsValue;
-       }
-       if(Input.GetKeyDown(KeyCode.Space) && extraJumps > 0){
-           rb.velocity = Vector2.up * jumpForce;
-           extraJumps--;
-       }else if(Input.GetKeyDown(KeyCode.Space)  && extraJumps == 0 && isGrounded == true) {
+       if(Input.GetKeyDown(KeyCode.Space)){
            rb.velocity = Vector2.up * jumpForce;
        }
    }
