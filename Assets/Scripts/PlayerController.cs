@@ -18,10 +18,6 @@ public class PlayerController : MonoBehaviour
    public LayerMask whatIsGround;
 
 
-   private int extraJumps;
-   public int extraJumpsValue;
-
-
    void Start(){
        rb = GetComponent<Rigidbody2D>();
    }
