@@ -26,8 +26,8 @@ public class Spawner : MonoBehaviour
 
     private void spawnBlocks()
     {
-        GameObject a = Instantiate(blockObstacle) as GameObject;
-        a.transform.position = new Vector2(screenBounds.x * -2, Random.Range(-screenBounds.y, screenBounds.y));
+       // GameObject a = Instantiate(blockObstacle) as GameObject;
+       // a.transform.position = new Vector2(screenBounds.x * -2, Random.Range(-screenBounds.y, screenBounds.y));
     }
 
     IEnumerator blockWave()
