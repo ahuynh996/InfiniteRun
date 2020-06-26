@@ -5,7 +5,7 @@ using UnityEngine;
 public class DamagePlayer : MonoBehaviour
 {
     public int playerHealth = 30;
-    int damage = 10;
+   // int damage = 10;
 
     private void Start()
     {

@@ -16,16 +16,9 @@ public class Health : MonoBehaviour
     {
         alive = true;
         currHealth = maxHealth;
-        //InvokeRepeating("DoDamage", 1f, 5f);
+
     }
 
-    //Do damage over time
-    /*
-    void DoDamage()
-    {
-        TakeDamage(10f);
-    }
-    */
 
     public void TakeDamage(float dmgAmount)
     {
@@ -38,7 +31,7 @@ public class Health : MonoBehaviour
         {
             currHealth = 0;
             alive = false;
-            //gameObject.SetActive(false);
+            FindObjectOfType<GameManager>().EndGame();
         }
 
         currHealth -= dmgAmount;
@@ -49,6 +42,5 @@ public class Health : MonoBehaviour
     void SetHealthBar()
     {
         float myHealth = currHealth / maxHealth;
-        //healthBar.transform.localScale = new Vector3(Mathf.Clamp(myHealth, 0f, 1f), healthBar.transform.localScale.y, healthBar.transform.localScale.z);
     }
 }
