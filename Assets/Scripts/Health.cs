@@ -30,17 +30,16 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int dmgAmount)
     {
-        if(currHealth == 0)
+
+        currHealth -= dmgAmount;
+        SetHealthBar();
+
+        if (currHealth <= 0)
         {
-            
             alive = false;
             FindObjectOfType<GameManager>().EndGame();
         }
-        else
-        {
-            currHealth -= dmgAmount;
-            SetHealthBar();
-        }
+       
     }
 
     private void OnTriggerEnter2D(Collider2D other)
