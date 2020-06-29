@@ -66,10 +66,25 @@ public class PlayerControllerMirror : NetworkBehaviour
             return;
         }
         if (Input.GetKeyDown(KeyCode.Space)) {
-            rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce);
+            CmdJump();
         }
     }
+    [Command]
+    void CmdJump()
+    {
+        RpcJump();
+    }
 
+    [ClientRpc]
+    void RpcJump()
+    {
+        Jump();
+    }
+
+    void Jump() 
+    {
+        rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce);
+    }
     void Flip() {
         facingRight = !facingRight;
         Vector3 Scaler = transform.localScale;
