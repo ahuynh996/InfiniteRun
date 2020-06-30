@@ -6,9 +6,12 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    public Image healthBar;
-    public int maxHealth = 3;
+    public int maxHealth;
     public int currHealth;
+    public Image[] hearts;
+    public Sprite fullHeart;
+    public Sprite emptyHeart;
+
     public bool alive = true;
     private GameObject player;
 
@@ -26,6 +29,37 @@ public class Health : MonoBehaviour
         rend = GetComponent<Renderer>();
         defaultColor = rend.material.color;
         hurtColor = Color.black;
+    }
+
+    void Update()
+    {
+
+        if(currHealth > maxHealth)
+        {
+            currHealth = maxHealth;
+        }
+
+        for (int i = 0; i < hearts.Length; i++)
+        {
+
+            if(i < currHealth)
+            {
+                hearts[i].sprite = fullHeart;
+            }
+            else
+            {
+                hearts[i].sprite = emptyHeart;
+            }
+
+            if(i < maxHealth)
+            {
+                hearts[i].enabled = true;
+            }
+            else
+            {
+                hearts[i].enabled = false;
+            }
+        }
     }
 
     public void TakeDamage(int dmgAmount)
