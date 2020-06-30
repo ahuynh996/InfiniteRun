@@ -69,22 +69,9 @@ public class PlayerControllerMirror : NetworkBehaviour
             CmdJump();
         }
     }
-    [Command]
-    void CmdJump()
-    {
-        RpcJump();
-    }
-
-    [ClientRpc]
-    void RpcJump()
-    {
-        Jump();
-    }
-
-    void Jump() 
-    {
-        rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce);
-    }
+    [Command] void CmdJump(){ RpcJump();}
+    [ClientRpc] void RpcJump() { Jump();}
+    void Jump() { rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce);}
     void Flip() {
         facingRight = !facingRight;
         Vector3 Scaler = transform.localScale;
