@@ -1,0 +1,1 @@
+This is a planned multiplayer flappy-bird like game. Intended to be released on Mobile.
