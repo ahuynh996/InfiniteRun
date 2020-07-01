@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Obstacle
+  - Canvas
+  - Heart0
+  - Heart1
+  - Heart2
   layers:
   - Default
   - TransparentFX

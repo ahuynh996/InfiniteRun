@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using UnityEngine.UI;
 
 public class PlayerControllerMirror : NetworkBehaviour
 {
@@ -14,7 +15,7 @@ public class PlayerControllerMirror : NetworkBehaviour
     [SerializeField]
     private float checkRadius;
     [SerializeField]
-    private int maxHealth = 10;
+    private int maxHealth = 3;
     [SerializeField]
     private float jumpForce;
     [SerializeField]
@@ -34,14 +35,32 @@ public class PlayerControllerMirror : NetworkBehaviour
     [SerializeField]
     private Transform groundCheck;
 
+    [Header("HUD")]
+    [SerializeField]
+    private Image[] hearts;
+    [SerializeField]
+    private Sprite fullHeart;
+    [SerializeField]
+    private Sprite emptyHeart;
+
     [Header("Game Stats")]
     [SerializeField]
     [SyncVar(hook = nameof(OnHealthChange))]
-    private int currentHealth = 10;
+    private int currentHealth = 3;
     [SerializeField]
     [SyncVar]
     private bool isTakingDmg;
 
+    public override void OnStartLocalPlayer()
+    {
+        Canvas canvas = FindObjectOfType<Canvas>();
+        canvas.enabled = true;
+        hearts = new Image[maxHealth];
+        hearts[0] = GameObject.FindGameObjectWithTag("Heart0").GetComponent<Image>();
+        hearts[1] = GameObject.FindGameObjectWithTag("Heart1").GetComponent<Image>();
+        hearts[2] = GameObject.FindGameObjectWithTag("Heart2").GetComponent<Image>();
+    }
+    #region Unused
     //void FixedUpdate()
     //{
     //    //if (!isLocalPlayer) {
@@ -60,36 +79,47 @@ public class PlayerControllerMirror : NetworkBehaviour
     //    //}
     //}
 
-    void Update() {
+    //void Flip() {
+    //    facingRight = !facingRight;
+    //    Vector3 Scaler = transform.localScale;
+    //    Scaler.x *= -1;
+    //    transform.localScale = Scaler;
+    //}
+    #endregion
 
-        if(!isLocalPlayer) {
-            return;
+    void Update()
+    {
+        if(!isLocalPlayer) { return;}
+        
+        if (Input.GetKeyDown(KeyCode.Space)) { CmdJump();}
+
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            if(hearts[i]!=null)
+            {
+                if (i < currentHealth) {
+                    hearts[i].sprite = fullHeart;
+                } else {
+                    hearts[i].sprite = emptyHeart;
+                }
+
+                if (i < maxHealth) {
+                    hearts[i].enabled = true;
+                } else {
+                    hearts[i].enabled = false;
+                }
+            }
         }
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            CmdJump();
-        }
-    }
-    [Command] void CmdJump(){ RpcJump();}
-    [ClientRpc] void RpcJump() { Jump();}
-    void Jump() { rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce);}
-    void Flip() {
-        facingRight = !facingRight;
-        Vector3 Scaler = transform.localScale;
-        Scaler.x *= -1;
-        transform.localScale = Scaler;
     }
 
-    private void OnHealthChange(int oldHealth, int newHealth) {
-        StartCoroutine(ClientBlink());
-        //SetHealthBar(newHealth);
-    }
+    [Command] void CmdJump() { RpcJump(); }
+    [ClientRpc] void RpcJump() { Jump(); }
+    void Jump() { rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce); }
 
     [ServerCallback]
     public void TakeDamage(int dmgAmount)
     {
-        if(isTakingDmg) {
-            return;
-        }
+        if(isTakingDmg) { return;}
         isTakingDmg = true;
         currentHealth -= dmgAmount;
         //SetHealthBar(currentHealth);
@@ -101,12 +131,21 @@ public class PlayerControllerMirror : NetworkBehaviour
         }
         StartCoroutine(ServerBlink());
     }
-    IEnumerator ServerBlink() {
+
+    void OnHealthChange(int oldHealth, int newHealth)
+    {
+        StartCoroutine(ClientBlink());
+        //SetHealthBar(newHealth);
+    }
+
+    IEnumerator ServerBlink()
+    {
         yield return new WaitForSeconds(4f);
         isTakingDmg = false;
     }
 
-    IEnumerator ClientBlink() {
+    IEnumerator ClientBlink()
+    {
         for (int i = 0; i < 20; ++i) {
             rend.material.color = Color.black;
             yield return new WaitForSeconds(0.1f);
