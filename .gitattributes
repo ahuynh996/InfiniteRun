@@ -1,0 +1,3 @@
+Assets/RealStarsSkybox/StarSkybox04/CubemapStars.cubemap filter=lfs diff=lfs merge=lfs -text
+Assets/RealStarsSkybox/StarSkybox04 filter=lfs diff=lfs merge=lfs -text
+Assets/RealStarsSkybox/StarSkybox04.meta filter=lfs diff=lfs merge=lfs -text
