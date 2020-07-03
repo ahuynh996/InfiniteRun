@@ -188,6 +188,12 @@ MonoBehaviour:
   emptyHeart: {fileID: 21300000, guid: 1c13d6c8ab05a70428113caebe17f142, type: 3}
   currentHealth: 3
   isTakingDmg: 0
+  playerSpritesArrayIndex: 0
+  playerSprites:
+  - {fileID: 21300000, guid: 9af255d873d64d8469f4fea27ba74141, type: 3}
+  - {fileID: 21300000, guid: 9af255d873d64d8469f4fea27ba74141, type: 3}
+  - {fileID: 21300000, guid: 9af255d873d64d8469f4fea27ba74141, type: 3}
+  - {fileID: 21300000, guid: 9af255d873d64d8469f4fea27ba74141, type: 3}
 --- !u!61 &3072699369751840701
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -212,5 +218,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.66, y: 0.92}
+  m_Size: {x: 1.24, y: 1.23}
   m_EdgeRadius: 0

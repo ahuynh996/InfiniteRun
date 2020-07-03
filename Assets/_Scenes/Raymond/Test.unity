@@ -524,10 +524,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1184970085}
-  - component: {fileID: 1184970084}
   - component: {fileID: 1184970083}
   - component: {fileID: 1184970086}
   - component: {fileID: 1184970082}
+  - component: {fileID: 1184970084}
   m_Layer: 0
   m_Name: 'NetworkManager '
   m_TagString: Untagged
@@ -599,7 +599,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1184970081}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8aab4c8111b7c411b9b92cf3dbc5bd4e, type: 3}
+  m_Script: {fileID: 11500000, guid: e076bb45517284c43a1a0b06472b051e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 1
@@ -621,6 +621,11 @@ MonoBehaviour:
   playerSpawnMethod: 1
   spawnPrefabs:
   - {fileID: 823266480851595179, guid: 4c91240611893ca4e86dc3ae9f471d5d, type: 3}
+  playerSprites:
+  - {fileID: 21300000, guid: a1371ddf3bf31374e8fab1fe4c469130, type: 3}
+  - {fileID: 21300000, guid: e10073816e503b641b8de3ab2d72cb5f, type: 3}
+  - {fileID: 21300000, guid: 56c38331051d1184ea940184400bbf9a, type: 3}
+  - {fileID: 21300000, guid: af79fac0941af3b4cbced1b465cd6032, type: 3}
 --- !u!4 &1184970085
 Transform:
   m_ObjectHideFlags: 0

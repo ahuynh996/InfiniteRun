@@ -24,9 +24,9 @@ public class MoveObstaclesMirror : NetworkBehaviour
         }
     }
     [ServerCallback]
-    void OnTriggerEnter2D(Collider2D collision) 
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player") {
+        if (collision.CompareTag("Player")) {
             collision.gameObject.GetComponent<PlayerControllerMirror>().TakeDamage(1);
         }
     }

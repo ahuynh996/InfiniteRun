@@ -51,6 +51,13 @@ public class PlayerControllerMirror : NetworkBehaviour
     [SyncVar]
     private bool isTakingDmg;
 
+    [Header("Player Sprite")]
+    [SerializeField]
+    [SyncVar(hook = nameof(OnPlayerSpritesArrayIndexChange))]
+    public int playerSpritesArrayIndex;
+    [SerializeField]
+    private Sprite[] playerSprites;
+
     public override void OnStartLocalPlayer()
     {
         Canvas canvas = FindObjectOfType<Canvas>();
@@ -59,7 +66,15 @@ public class PlayerControllerMirror : NetworkBehaviour
         hearts[0] = GameObject.FindGameObjectWithTag("Heart0").GetComponent<Image>();
         hearts[1] = GameObject.FindGameObjectWithTag("Heart1").GetComponent<Image>();
         hearts[2] = GameObject.FindGameObjectWithTag("Heart2").GetComponent<Image>();
+        GetComponent<SpriteRenderer>().sprite = playerSprites[playerSpritesArrayIndex];
     }
+    void Start() {
+        if(isServer && !isLocalPlayer) 
+        {
+            GetComponent<SpriteRenderer>().sprite = playerSprites[playerSpritesArrayIndex];
+        }
+    }
+
     #region Unused
     //void FixedUpdate()
     //{
@@ -112,9 +127,9 @@ public class PlayerControllerMirror : NetworkBehaviour
         }
     }
 
-    [Command] void CmdJump() { RpcJump(); }
-    [ClientRpc] void RpcJump() { Jump(); }
-    void Jump() { rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce); }
+    [Command] void CmdJump() => RpcJump();
+    [ClientRpc] void RpcJump() => Jump();
+    void Jump() => rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce);
 
     [ServerCallback]
     public void TakeDamage(int dmgAmount)
@@ -122,7 +137,6 @@ public class PlayerControllerMirror : NetworkBehaviour
         if(isTakingDmg) { return;}
         isTakingDmg = true;
         currentHealth -= dmgAmount;
-        //SetHealthBar(currentHealth);
 
         if (currentHealth <= 0)
         {
@@ -132,12 +146,12 @@ public class PlayerControllerMirror : NetworkBehaviour
         StartCoroutine(ServerBlink());
     }
 
-    void OnHealthChange(int oldHealth, int newHealth)
+    void OnHealthChange(int oldHealth, int newHealth) => StartCoroutine(ClientBlink());
+    void OnPlayerSpritesArrayIndexChange(int oldIndex, int newIndex)
     {
-        StartCoroutine(ClientBlink());
-        //SetHealthBar(newHealth);
+        GetComponent<SpriteRenderer>().sprite = playerSprites[newIndex];
+        playerSpritesArrayIndex = newIndex;
     }
-
     IEnumerator ServerBlink()
     {
         yield return new WaitForSeconds(4f);
