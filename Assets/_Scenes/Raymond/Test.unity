@@ -155,6 +155,8 @@ MonoBehaviour:
   syncInterval: 0.1
   blockObstacle: {fileID: 823266480851595179, guid: 4c91240611893ca4e86dc3ae9f471d5d,
     type: 3}
+  topBorder: {fileID: 884626750}
+  bottomBorder: {fileID: 1164717520}
   respawnTime: 1
   screenBounds: {x: 0, y: 0}
 --- !u!114 &6543563
@@ -509,7 +511,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1164717520}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.26, z: 10}
+  m_LocalPosition: {x: 0, y: -8.75, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -621,11 +623,6 @@ MonoBehaviour:
   playerSpawnMethod: 1
   spawnPrefabs:
   - {fileID: 823266480851595179, guid: 4c91240611893ca4e86dc3ae9f471d5d, type: 3}
-  playerSprites:
-  - {fileID: 21300000, guid: a1371ddf3bf31374e8fab1fe4c469130, type: 3}
-  - {fileID: 21300000, guid: e10073816e503b641b8de3ab2d72cb5f, type: 3}
-  - {fileID: 21300000, guid: 56c38331051d1184ea940184400bbf9a, type: 3}
-  - {fileID: 21300000, guid: af79fac0941af3b4cbced1b465cd6032, type: 3}
 --- !u!4 &1184970085
 Transform:
   m_ObjectHideFlags: 0
