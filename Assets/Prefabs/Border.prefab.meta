@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Mirror/Examples/AdditiveScenes/Scenes/MainScene.unity.meta
+guid: 1aa200a139b8e88428c7670b749aca21
+DefaultImporter:
+=======
 guid: 0ea5bbb71b4a91d4db2ef9f9e4b62387
 PrefabImporter:
+>>>>>>> master:Assets/Prefabs/Border.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
