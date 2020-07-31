@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerController : MonoBehaviour
 {
    public float speed;
@@ -36,9 +37,10 @@ public class PlayerController : MonoBehaviour
        }
    }
 
-   void Update(){
-
-       if(Input.GetKeyDown(KeyCode.Space)){
+   void Update()
+   {
+       if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+       {
            rb.velocity = Vector2.up * jumpForce;
        }
    }

@@ -5,23 +5,20 @@ using UnityEngine;
 public class MoveObstacles : MonoBehaviour
 {
     public float speed = 10.0f;
+    public float killTime = 5.0f;
     private Rigidbody rb;
-    private Vector2 screenBounds;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = this.GetComponent<Rigidbody>();
         rb.velocity = new Vector2(-speed, 0);
-        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.x < screenBounds.x * 2)
-        {
-            Destroy(this.gameObject);
-        }
+            Destroy(this.gameObject, killTime);
+
     }
 }
